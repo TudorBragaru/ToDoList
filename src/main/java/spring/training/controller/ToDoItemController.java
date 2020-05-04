@@ -1,7 +1,9 @@
 package spring.training.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,7 @@ import spring.training.util.ViewNames;
 
 import java.time.LocalDate;
 
+@Slf4j
 @Controller
 public class ToDoItemController {
 
@@ -28,7 +31,6 @@ public class ToDoItemController {
 
     @ModelAttribute
     public ToDoData toDoData() {
-        toDoItemService.addItem(new ToDoItem("six", "six details", LocalDate.now()));
         return toDoItemService.getData();
 
     }
@@ -40,9 +42,18 @@ public class ToDoItemController {
         return ViewNames.ITEMS_LIST;
     }
 
-    @PostMapping(Mappings.ADD_ITEMS)
+    @GetMapping(Mappings.ADD_ITEM)
+    public String AddEditItem (Model model) {
+        ToDoItem toDoItem = new ToDoItem("", "", LocalDate.now());
+        model.addAttribute(AttributeNames.TODO_ITEM, toDoItem);
+        return ViewNames.ADD_ITEM;
+    }
+
+    @PostMapping(Mappings.ADD_ITEM)
     public String processItem(@ModelAttribute(AttributeNames.TODO_ITEM) ToDoItem toDoItem){
-        return "redirect/" + Mappings.ITEMS;
+        log.info("toDoItem from from = {}", toDoItem);
+        toDoItemService.addItem(toDoItem);
+        return "redirect:/" + Mappings.ITEMS;
     }
 
 

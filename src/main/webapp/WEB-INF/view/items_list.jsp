@@ -14,8 +14,9 @@
                 <c:forEach var="item" items="${toDoData.items}">
                     <tr>
                         <td><c:out value="${item.title}"/>
+                        <td><c:out value="${item.details}"/>
                         <td><c:out value="${item.deadline}"/>
-                    </tr>
+                   </tr>
                 </c:forEach>
 
             </tr>
