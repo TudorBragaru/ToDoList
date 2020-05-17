@@ -1,10 +1,12 @@
 package spring.training.service;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import spring.training.model.ToDoData;
 import spring.training.model.ToDoItem;
 
+@Slf4j
 @Service
 public class ToDoItemServiceImpl implements ToDoItemService {
 
@@ -23,6 +25,8 @@ public class ToDoItemServiceImpl implements ToDoItemService {
 
     @Override
     public ToDoItem getItem(int number) {
+        log.info("numarul este {}", number);
+        log.info("size-ul este {}", data.getItems().size());
         return data.getItems().get(number);
     }
 

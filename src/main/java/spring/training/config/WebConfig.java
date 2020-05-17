@@ -5,16 +5,19 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import spring.training.util.ViewNames;
 
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "spring.training")
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
 
-    public static final String REZOLVER_PREFIX = "/WEB-INF/view/";
-    public static final String REZOLVER_SUFIX = ".jsp";
+    private static final String REZOLVER_PREFIX = "/WEB-INF/view/";
+    private static final String REZOLVER_SUFIX = ".jsp";
 
     @Bean
     public ViewResolver viewResolver(){
@@ -24,6 +27,11 @@ public class WebConfig {
         return viewResolver;
     }
 
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry){
+        registry.addViewController("/").setViewName(ViewNames.HOME);
+    }
 
 
 }
