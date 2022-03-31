@@ -11,7 +11,7 @@
 
     <properties>
         <java.version>13</java.version>
-        <webmcv-version>5.2.5.RELEASE</webmcv-version>
+        <webmcv-version>5.3.18</webmcv-version>
         <lombark.version>1.18.10</lombark.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <annotation-api.version>1.3.2</annotation-api.version>
